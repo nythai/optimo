@@ -19,4 +19,5 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('', RedirectView.as_view(pattern_name="dashboard:root", permanent=False)),
     path('dashboard/', include(("dashboard.urls", "dashboard"), namespace="dashboard")),
+    path('full-text/', include(("fulltext.urls", "fulltext"), namespace="fulltext")),
 ]

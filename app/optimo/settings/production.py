@@ -1,6 +1,6 @@
 from .common import *
 
-# change to postgresql
+# TODO change to postgresql
 # DATABASES = {
 #     "default": {
 #         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),

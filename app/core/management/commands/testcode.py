@@ -1,11 +1,6 @@
-import os
-
 from django.core.management.base import BaseCommand
-from django.db import connection
 
-from django.conf import settings
-
-from packagesloader.tasks import parse_and_load_feed
+from packages.tasks import parse_and_load_feed
 
 
 class Command(BaseCommand):

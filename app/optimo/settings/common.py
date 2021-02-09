@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'core.apps.CoreConfig',
-    'packagesloader.apps.PackagesloaderConfig',
+    'packages.apps.PackagesloaderConfig',
     'dashboard.apps.DashboardConfig'
 ]
 

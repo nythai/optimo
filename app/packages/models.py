@@ -6,7 +6,7 @@ class Package(models.Model):
     link = models.URLField()
     guid = models.CharField(max_length=70, unique=True)
     description = models.TextField()
-    author_name = models.CharField(max_length=320, blank=True)
+    author_name = models.CharField(max_length=320)
     author_email = models.EmailField()
 
     def __init__(self, *args, **kwargs):

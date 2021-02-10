@@ -1,2 +1,4 @@
 /app/venv/
 /.idea/
+/elastic_data/
+/postgres_data/

@@ -9,6 +9,8 @@ class Command(BaseCommand):
     """
     Command to remove migration files.
     Example $> python manage.py removemigrations
+
+    @author: Kamil Żuchowski (kamil@kzuchowskinss.pl).
     """
     help = 'Removes migration files.'
 

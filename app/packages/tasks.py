@@ -7,7 +7,9 @@ def parse_and_load_feed():
     Parses python packages rss feed and loads them to database.
     Searches for existing package first based on guid, when found it updates existing one if not, creates new.
 
+
     :return: void
+    @author: Kamil Żuchowski (kamil@kzuchowskinss.pl).
     """
     parsing_service = PackageParserService()
     parsed_packages = parsing_service.parse_packages_from_rss_source()

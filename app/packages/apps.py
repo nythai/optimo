@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class PackagesloaderConfig(AppConfig):
+class PackagesConfig(AppConfig):
     name = 'packages'

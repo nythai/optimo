@@ -14,6 +14,8 @@ class Command(BaseCommand):
     Takes as --profile parameter one of AVAILABLE_BUILD_PARAMETERS.
     Use --acceptrisk when about to rebuild production or any of WARN_BUILD_PROFILES.
     Example: $> python manage.py buildapp --profile development
+
+    @author: Kamil Żuchowski (kamil@kzuchowskinss.pl).
     """
     help = 'Builds an app. CAUTION: It clears profile\'s database'
 

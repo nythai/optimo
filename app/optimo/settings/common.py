@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,9 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'core.apps.CoreConfig',
-    'packages.apps.PackagesloaderConfig',
+    'packages.apps.PackagesConfig',
     'dashboard.apps.DashboardConfig',
-    'fulltext.apps.FulltextConfig'
+
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -73,7 +72,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'optimo.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -83,7 +81,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -103,7 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -117,10 +113,17 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
 
-PACKAGES_RSS_SOURCE_LINK = "https://pypi.org/rss/packages.xml"
+PACKAGES_RSS_SOURCE_LINK = os.environ.get("PACKAGES_RSS_SOURCE_LINK", "https://pypi.org/rss/packages.xml")
+PACKAGES_PAGINATION_PAGE_LIMIT = os.environ.get("PACKAGES_PAGINATION_PAGE_LIMIT", 20)
+ELASTICSEARCH_HOST = os.environ.get("ELASTICSEARCH_HOST", "elastic")
+ELASTICSEARCH_PORT = os.environ.get("ELASTICSEARCH_PORT", "9200")
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': ELASTICSEARCH_HOST + ":" + ELASTICSEARCH_PORT
+    },
+}

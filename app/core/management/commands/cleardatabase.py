@@ -11,6 +11,8 @@ class Command(BaseCommand):
     Clears database.
     Check settings before running.
     Example: $> python manage.py cleardatabase
+
+    @author: Kamil Żuchowski (kamil@kzuchowskinss.pl).
     """
     help = 'Clears database'
 

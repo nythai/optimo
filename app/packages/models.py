@@ -2,9 +2,14 @@ from django.db import models
 
 
 class Package(models.Model):
-    title = models.CharField(max_length=70)
+    """
+    Model class represents python package information from PyPi RSS feed.
+
+    @author: Kamil Żuchowski (kamil@kzuchowskinss.pl).
+    """
+    title = models.CharField(max_length=150)
     link = models.URLField()
-    guid = models.CharField(max_length=70, unique=True)
+    guid = models.CharField(max_length=150, unique=True)
     description = models.TextField()
     author_name = models.CharField(max_length=320)
     author_email = models.EmailField()

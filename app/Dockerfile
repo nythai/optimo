@@ -14,4 +14,5 @@ RUN pip install -r requirements.txt
 COPY . .
 
 EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000", "--settings=optimo.settings.development"]
+
+CMD bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python manage.py runserver 0.0.0.0:8000 --settings=optimo.settings'

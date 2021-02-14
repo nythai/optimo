@@ -9,7 +9,7 @@ class Command(BaseCommand):
 
     @author: Kamil Żuchowski (kamil@kzuchowskinss.pl).
     """
-    help = 'Command loads python packages information to database.'
+    help = 'Command to load python packages information to database.'
 
     def handle(self, *args, **options):
         load_python_packages_data()

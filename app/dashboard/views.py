@@ -13,9 +13,11 @@ def dashboard_home(request):
 def dashboard_search(request):
     search_phrase = request.GET.get("search_phrase")
     search_results = []
-    if not search_phrase:
+    if search_phrase is not None and len(search_phrase) == 0:
         messages.warning(request, "Provide searching phrase..")
     else:
         search_results = FullTextSearchService.search_package(search_phrase)
+        if len(search_results) == 0:
+            messages.warning(request, "Not found any results.")
 
-    return render(request, "dashboard/search.html", {"search_results": search_results})
+    return render(request, "dashboard/search.html", {"packages": search_results})

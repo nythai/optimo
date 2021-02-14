@@ -1,5 +1,48 @@
 {% extends "dashboard/dashboard_base.html" %}
 
 {% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {% if messages %}
+                    <div class="row">
+                        <div class="col-sm-12 col-sm-offset-3">
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}" role="alert">
+                                    <p>{{ message }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
 
+                    </div>
+                {% endif %}
+            </div>
+            {% if packages %}
+                <table class="table tableFixHead">
+                    <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Link</th>
+                        <th scope="col">GUID</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Author name</th>
+                        <th scope="col">Author email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for package in packages %}
+                        <tr>
+                            <th scope="col">{{ package.title }}</th>
+                            <th scope="col">{{ package.link }}</th>
+                            <th scope="col">{{ package.guid }}</th>
+                            <th scope="col">{{ package.description }}</th>
+                            <th scope="col">{{ package.author_name }}</th>
+                            <th scope="col">{{ package.author_email }}</th>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

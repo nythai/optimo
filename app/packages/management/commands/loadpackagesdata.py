@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from packages.tasks import parse_and_load_feed
+from packages.tasks import load_python_packages_data
 
 
 class Command(BaseCommand):
@@ -12,7 +12,7 @@ class Command(BaseCommand):
     help = 'Command loads python packages information to database.'
 
     def handle(self, *args, **options):
-        parse_and_load_feed()
+        load_python_packages_data()
 
         self.stdout.write(
             self.style.SUCCESS('>>>>>>>>>>>>>>>>>>>> Successfully loaded python packages data <<<<<<<<<<<<<<<<<<<<'))

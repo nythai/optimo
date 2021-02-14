@@ -33,3 +33,37 @@ services:
       - ./elastic_data:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
+
+  redis:
+    image: 'bitnami/redis:latest'
+    container_name: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+
+  celery:
+    container_name: celery
+    restart: always
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    command: celery -A optimo worker -l info
+    env_file:
+      - .env
+    depends_on:
+      - web
+      - redis
+      - db
+
+  celery-beat:
+    container_name: celery-beat
+    restart: always
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    command: celery -A optimo beat -l info
+    env_file:
+      - .env
+    depends_on:
+      - web
+      - redis
+      - db

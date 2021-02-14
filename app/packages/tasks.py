@@ -1,8 +1,13 @@
+from celery import Celery
+
 from packages.models import Package
 from packages.services import PackageParserService
 
+app = Celery('optimo')
 
-def parse_and_load_feed():
+
+@app.task
+def load_python_packages_data():
     """
     Parses python packages rss feed and loads them to database.
     Searches for existing package first based on guid, when found it updates existing one if not, creates new.
@@ -21,3 +26,5 @@ def parse_and_load_feed():
             package = Package()
         package.populate_from_rss_raw_package(parsed_package)
         package.save()
+
+    print("Added/Updated %s packages." % len(parsed_packages))

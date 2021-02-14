@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
 
     'django_elasticsearch_dsl',
+    'celery'
 ]
 
 MIDDLEWARE = [
@@ -120,6 +122,7 @@ STATIC_URL = '/static/'
 
 PACKAGES_RSS_SOURCE_LINK = os.environ.get("PACKAGES_RSS_SOURCE_LINK", "https://pypi.org/rss/packages.xml")
 PACKAGES_PAGINATION_PAGE_LIMIT = os.environ.get("PACKAGES_PAGINATION_PAGE_LIMIT", 20)
+
 ELASTICSEARCH_HOST = os.environ.get("ELASTICSEARCH_HOST", "elastic")
 ELASTICSEARCH_PORT = os.environ.get("ELASTICSEARCH_PORT", "9200")
 ELASTICSEARCH_DSL = {
@@ -127,3 +130,17 @@ ELASTICSEARCH_DSL = {
         'hosts': ELASTICSEARCH_HOST + ":" + ELASTICSEARCH_PORT
     },
 }
+
+CELERY_TIMEZONE = "Europe/Warsaw"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_BEAT_SCHEDULE = {
+    'load_packages_data': {
+        'task': 'packages.tasks.load_python_packages_data',
+        'schedule': timedelta(hours=24),
+    }
+}
+
+REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
+REDIS_PORT = os.environ.get("REDIS_PORT", "5672")
